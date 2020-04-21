@@ -1,0 +1,145 @@
+# Name: CS 1104 instructor
+
+# Program description: Generates three-card hands from a deck of cards and
+#                      determines when a straight flush, three of a kind,
+#                      straight, flush, and pair occur.
+
+import deck
+import random
+
+# Size of each hand of cards.
+HAND_SIZE = 3
+
+
+"""
+Check if a hand has a three of a kind.
+
+@param  values  A list of values of three cards.
+@return Whether all three cards have the same value.
+"""
+def check_three(values):
+    return (values[0] == values[1]
+            and values[1] == values[2]
+            and values[0] == values[2])
+
+
+"""
+Check if a hand has a flush.
+
+@param  values  A list of suits of three cards.
+@return Whether all three cards have the same suit.
+"""
+def check_flush(suits):
+    return (suits[0] == suits[1]
+            and suits[1] == suits[2]
+            and suits[0] == suits[2])
+
+
+"""
+Check if a hand has a pair.
+
+@param  values  A list of values of three cards.
+@return Whether two of the cards have the same value.
+"""
+def check_pair(values):
+    return (values[0] == values[1]
+            or values[1] == values[2]
+            or values[0] == values[2])
+
+
+"""
+Check if a hand has a straight.
+
+@param  values  A list of values of three cards.
+@return Whether the cards have consecutive values.
+"""
+def check_straight(values):
+    card_values = sorted(values)
+
+    idx = 0
+    for num in range(card_values[0], card_values[0] + 3):
+        if card_values[idx] != num:
+            return False
+
+        idx += 1
+
+    return True
+
+
+"""
+Check if a hand has a straight flush.
+
+@param  suits   A list of suits of three cards.
+@param  values  A list of values of three cards.
+@return Whether the cards have consecutive values and the same suit.
+"""
+def check_straight_flush(suits, values):
+    return check_flush(suits) and check_straight(values)
+
+
+"""
+Print whether a specific hand of cards occurred.
+
+@param  hand  List representing hand.
+"""
+def check_hand(hand):
+    # Get the suits of the cards.
+    suits = [card.get_suit() for card in hand]
+
+    # Get the values of the cards.
+    values = [card.get_value() for card in hand]
+
+    # Check the three cards and print any special sequences found.
+    if check_straight_flush(suits, values):
+        print('--> Straight flush', end=' ')
+    elif check_three(values):
+        print('--> Three of a kind', end=' ')
+    elif check_straight(values):
+        print('--> Straight', end=' ')
+    elif check_flush(suits):
+        print('--> Flush', end=' ')
+    elif check_pair(values):
+        print('--> Pair', end=' ')
+
+    print()
+
+
+"""
+Prints the hand of cards. Also, prints whether a straight flush, three of
+a kind, straight, flush, and pair occurred.
+
+@param  hand  A list of three elements representing the hand of cards.
+@return Three numbers in a list representing a hand of cards.
+"""
+def print_and_check_hand(hand):
+    # Print the three cards.
+    for card in hand:
+        print('{:>3s}'.format(str(card)), end=' ')
+
+    # Check the three cards.
+    check_hand(hand)
+
+
+def main():
+    # Get seed from user.
+    seed = int(input('Enter a seed: '))
+
+    # Set seed for random number generator.
+    random.seed(seed)
+
+    print()
+
+    # Create a deck of cards object.
+    deck_of_cards = deck.Deck()
+
+    # Generate three-card hands and print the results.
+    while deck_of_cards.get_num_of_cards() >= HAND_SIZE:
+        hand = [deck_of_cards.draw() for _ in range(HAND_SIZE)]
+ 
+        # Print the hand and check for special sequences.
+        print_and_check_hand(hand)
+
+
+# DO NOT CHANGE ANYTHING BELOW THIS COMMENT.
+if __name__ == '__main__':
+    main()
