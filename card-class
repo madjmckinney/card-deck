@@ -1,0 +1,54 @@
+class Card:
+    # Card string names.
+    NAMES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+
+    # Card suits.
+    SUITS = ['C', 'D', 'H', 'S']
+    
+    """
+    Initializes the value and suit.
+    
+    @param value The value of the card.
+    @param suit The suit of the card.
+    """
+    def __init__(self, value=0, suit=0):
+        self.__value = value
+        self.__suit = suit
+        
+    """
+    Returns the value of the card.
+    """
+    def get_value(self):
+        return self.__value
+    
+    """
+    Returns the name of the card.
+    """
+    def get_name(self):
+        Card.NAMES
+        NAMES = Card.NAMES
+        return NAMES[self.__value - 1]
+    
+    """
+    Returns the suit of the card.
+    """
+    def get_suit(self):
+        Card.SUITS
+        SUITS = Card.SUITS
+        return SUITS[self.__suit]
+    
+    """
+    Prints the card name and suit.
+    """
+    def __str__(self):
+        return ''
+        
+    """
+    Determines if cards are equal.
+    """
+    def __eq__(self, other):
+        if isinstance(other, Card):
+            return self.__value == other.__value and self.__suit == other.__suit
+        else:
+            return False
+        
