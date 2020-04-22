@@ -51,7 +51,7 @@ class Card:
     Prints the card name and suit.
     """
     def __str__(self):
-        return '{}{}'.format(self=self)
+        return '{0} of {1}'.format(Card.NAMES[self.__value - 1], Card.SUITS[self.__suit])
         
     """
     Determines if cards are equal.
