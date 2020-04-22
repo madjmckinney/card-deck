@@ -1,3 +1,13 @@
+#Name: Maddie McKinney
+#VUnetID: mckinnmj
+#Email: madison.j.mckinney@vanderbilt.edu
+#Class: CS 1104 - Vanderbilt University
+#Section: 2
+#Date: 4/20/2020
+#Honor Statement: I attest that I understand the honor code for this course and have neither
+#                 given nor received any unauthorized aid on this assignment.
+
+#Class Description: Provides the characteristics for a card.
 class Card:
     # Card string names.
     NAMES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
@@ -41,7 +51,7 @@ class Card:
     Prints the card name and suit.
     """
     def __str__(self):
-        return ''
+        return '{}{}'.format(self=self)
         
     """
     Determines if cards are equal.
