@@ -33,13 +33,20 @@ class Deck:
     Gets the number of cards left in the deck.
     """
     def get_num_of_cards(self):
-        self.__num_of_cards = 52 - self.__cards.count(0)
+        self.__num_of_cards = 52 - len(self.__cards)
         return self.__num_of_cards
     
     """
     Draws a random card and changes the index of the card in the deck to 0.
     """
     def draw(self):
-        self.card = card.Card(random.randint(1,14), random.randint(0,4))
-        self.__cards.remove(self.card)        
-        
+        self.in_deck = False
+        while self.in_deck == False:
+            self.card = card.Card(random.randint(1, 14), random.randint(0, 3))
+            if self.card in self.__cards:
+                self.__cards.remove(self.card)
+                self.in_deck = True
+            else:
+                self.card = card.Card(random.randint(1, 14), random.randint(0, 3))
+        Deck.get_num_of_cards(self)
+        return card.Card.__str__(self)
